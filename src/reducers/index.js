@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
+import ApiReducer from "./ApiReducer";
 
 export default combineReducers({
-  reducer: (state = { initial: null }) => state
+  api: ApiReducer
 });
