@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, TouchableWithoutFeedback, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 import { RecyclerListView } from "recyclerlistview";
 import Thumbnail from "./Thumbnail";
 import { Spinner } from "./common";
+import { setSelectedImageAction } from "../actions";
 import * as lang from "../config/languages";
 
 const List = ({
@@ -15,17 +17,27 @@ const List = ({
   thumbnailWidthPx,
   images,
   loading,
-  error
+  error,
+  setSelectedImage,
+  fullSizeImageScreen
 }) => {
   const { errorViewStyle, errorTextStyle } = styles;
 
   const rowRenderer = (type, data) => (
-    <View style={{ flex: 1 }}>
-      <Thumbnail
-        thumbnailUrl={data.urls.regular}
-        thumbnailWidthPx={thumbnailWidthPx}
-      />
-    </View>
+    <TouchableWithoutFeedback
+      style={styles.touchableContainer}
+      onPress={() => {
+        setSelectedImage(data.urls.regular);
+        fullSizeImageScreen({ routeName: "FullImage" });
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Thumbnail
+          thumbnailUrl={data.urls.regular}
+          thumbnailWidthPx={thumbnailWidthPx}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 
   if (loading && (images.length === 0 || Object.keys(images).length === 0))
@@ -72,4 +84,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default List;
+const mapDispatchToProps = dispatch => ({
+  setSelectedImage: url => dispatch(setSelectedImageAction(url)),
+  fullSizeImageScreen: routeName =>
+    dispatch(NavigationActions.navigate(routeName))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(List);

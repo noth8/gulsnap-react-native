@@ -6,7 +6,7 @@ import {
   createReactNavigationReduxMiddleware
 } from "react-navigation-redux-helpers";
 import { backToTabAfterAuthAction } from "../actions";
-import { HomeScreen } from "../screens";
+import { HomeScreen, FullImageScreen } from "../screens";
 
 const RootNavigator = createStackNavigator(
   {
@@ -15,6 +15,9 @@ const RootNavigator = createStackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    FullImage: {
+      screen: FullImageScreen
     }
   },
   { initialRouteName: "Home" }
