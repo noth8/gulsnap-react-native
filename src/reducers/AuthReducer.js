@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   password: "",
   user: "",
   error: "",
-  loading: false
+  loading: false,
+  sended: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,6 +42,21 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         password: "",
+        loading: false,
+        error: action.payload
+      };
+    case types.RESET_USER_PASSORD_PROCESS:
+      return { ...state, loading: true, error: "" };
+    case types.RESET_USER_PASSORD_SUCCESS:
+      return {
+        sended: true,
+        email: "",
+        loading: false,
+        error: ""
+      };
+    case types.RESET_USER_PASSWORD_FAIL:
+      return {
+        ...state,
         loading: false,
         error: action.payload
       };

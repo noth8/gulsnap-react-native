@@ -7,5 +7,9 @@ export const FIREBASE_NO_INTERNET = "Check your internet connection";
 
 export const LOGIN_BUTTON_TEXT = "Login";
 export const LOGIN_SUBMIT_BUTTON = "Enter";
+export const RESET_PASSWORD_TITLE = "Password reset";
+export const RESET_PASSWORD_BUTTON = "Look at email with reset instructions.";
+export const RESET_SUBMIT_BUTTON = "Send";
+export const RESET_PASSWORD_RETURN_BACK = "Back to Login";
 export const EMAIL_HINT = "Email";
 export const PASSWORD_HINT = "Password";

@@ -13,6 +13,9 @@ export const LOGIN_USER_FAIL = "login_user_fail";
 export const LOGOUT_USER_PROCESS = "logout_user_process";
 export const LOGOUT_USER_SUCCESS = "logout_user_success";
 export const LOGOUT_USER_FAIL = "logout_user_fail";
+export const RESET_USER_PASSORD_PROCESS = "reset_user_password_process";
+export const RESET_USER_PASSORD_SUCCESS = "reset_user_password_success";
+export const RESET_USER_PASSWORD_FAIL = "reset_user_password_fail";
 
 export const FIREBASE_INVALID_EMAIL_FORMAT = "auth/invalid-email";
 export const FIREBASE_EMAIL_NOT_FOUND = "auth/user-not-found";
