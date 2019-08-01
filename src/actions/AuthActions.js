@@ -3,6 +3,11 @@ import "@firebase/auth";
 import * as types from "./Types";
 import * as lang from "../config/languages";
 
+export const nameChangedAction = text => ({
+  type: types.NAME_CHANGED,
+  payload: text
+});
+
 export const emailChangedAction = text => ({
   type: types.EMAIL_CHANGED,
   payload: text
@@ -82,5 +87,38 @@ export const resetUserPasswordAction = email => dispatch => {
         type: types.RESET_USER_PASSWORD_FAIL,
         payload: errorDescription
       });
+    });
+};
+
+export const registerUserAction = ({ name, email, password }) => dispatch => {
+  dispatch({ type: types.REGISTER_USER_PROCESS });
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .catch(error => {
+      let errorDescription;
+      switch (error.code) {
+        case types.FIREBASE_EMAIL_OCCUPIED:
+          errorDescription = lang.FIREBASE_EMAIL_OCCUPIED;
+          break;
+        case types.FIREBASE_INVALID_EMAIL_FORMAT:
+          errorDescription = lang.FIREBASE_INVALID_EMAIL_FORMAT;
+          break;
+        case types.FIREBASE_WEAK_PASSWORD:
+          errorDescription = lang.FIREBASE_WEAK_PASSWORD;
+          break;
+        default:
+          errorDescription = lang.FIREBASE_NO_INTERNET;
+      }
+      dispatch({ type: types.REGISTER_USER_FAIL, payload: errorDescription });
+    })
+    .then(user => {
+      if (user) {
+        firebase.auth().currentUser.updateProfile({
+          displayName: name
+        });
+        dispatch({ type: types.REGISTER_USER_SUCCESS, payload: user });
+        dispatch(loginUserAction({ email, password }));
+      }
     });
 };

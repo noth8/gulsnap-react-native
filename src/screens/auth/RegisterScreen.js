@@ -10,9 +10,10 @@ import {
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 import {
+  nameChangedAction,
   emailChangedAction,
   passwordChangedAction,
-  loginUserAction
+  registerUserAction
 } from "../../actions";
 import { InputField, Button, Spinner } from "../../components/common";
 import {
@@ -24,14 +25,18 @@ import * as lang from "../../config/languages";
 
 const appLogo = require("../../assets/logo.png");
 
-class LoginScreen extends Component {
+class RegisterScreen extends Component {
   changeInputFocus = inputFieldName => () => {
     switch (inputFieldName) {
+      case "Name":
+        this.email.inputFieldRef.focus();
+        break;
       case "Email":
         this.password.inputFieldRef.focus();
         break;
       case "Password":
-        this.props.loginUser({
+        this.props.registerUser({
+          name: this.props.name,
           email: this.props.email,
           password: this.props.password
         });
@@ -41,17 +46,17 @@ class LoginScreen extends Component {
   renderSectionHeader() {
     return (
       <View style={styles.sectionHeaderView}>
-        <View style={styles.sectionButtonPressedView}>
-          <Text style={styles.sectionButtonText}>{lang.LOGIN_BUTTON_TEXT}</Text>
-        </View>
         <TouchableOpacity
           style={styles.sectionButtonView}
-          onPress={() => this.props.registerScreen({ routeName: "Register" })}
+          onPress={() => this.props.loginScreen({ routeName: "Login" })}
         >
+          <Text style={styles.sectionButtonText}>{lang.LOGIN_BUTTON_TEXT}</Text>
+        </TouchableOpacity>
+        <View style={styles.sectionButtonPressedView}>
           <Text style={styles.sectionButtonPressedText}>
             {lang.REGISTER_BUTTON_TEXT}
           </Text>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -59,6 +64,15 @@ class LoginScreen extends Component {
   renderSectionBody() {
     return (
       <View style={styles.sectionBodyView}>
+        <InputField
+          icon="user"
+          placeholder={lang.NAME_HINT}
+          value={this.props.name}
+          onChangeText={text => this.props.nameChanged(text)}
+          autoCapitalize="words"
+          ref={ref => (this.name = ref)}
+          focus={this.changeInputFocus}
+        />
         <InputField
           icon="envelope"
           placeholder={lang.EMAIL_HINT}
@@ -97,13 +111,14 @@ class LoginScreen extends Component {
       <View style={styles.submitButtonView}>
         <Button
           onPress={() =>
-            this.props.loginUser({
+            this.props.registerUser({
+              name: this.props.name,
               email: this.props.email,
               password: this.props.password
             })
           }
         >
-          {lang.LOGIN_SUBMIT_BUTTON}
+          {lang.REGISTER_SUBMIT_BUTTON}
         </Button>
       </View>
     );
@@ -168,25 +183,26 @@ const styles = StyleSheet.create({
     color: "red"
   },
   submitButtonView: {
-    marginTop: heightPercentageToDP("4%")
+    marginTop: heightPercentageToDP("0.5%")
   }
 });
 
 const mapStateToProps = state => {
-  const { email, password, error, loading } = state.auth;
-  return { email, password, error, loading };
+  const { name, email, password, error, loading } = state.auth;
+  return { name, email, password, error, loading };
 };
 
 const mapDispatchToProps = dispatch => ({
-  registerScreen: routeName => dispatch(NavigationActions.navigate(routeName)),
+  loginScreen: routeName => dispatch(NavigationActions.navigate(routeName)),
+  nameChanged: text => dispatch(nameChangedAction(text)),
   emailChanged: text => dispatch(emailChangedAction(text)),
   passwordChanged: text => dispatch(passwordChangedAction(text)),
-  loginUser: data => dispatch(loginUserAction(data))
+  registerUser: data => dispatch(registerUserAction(data))
 });
 
-const LoginScreenConnected = connect(
+const RegisterScreenConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginScreen);
+)(RegisterScreen);
 
-export { LoginScreenConnected as LoginScreen };
+export { RegisterScreenConnected as RegisterScreen };
