@@ -7,6 +7,9 @@ export const FIREBASE_NO_INTERNET = "Check your internet connection";
 export const FIREBASE_EMAIL_OCCUPIED = "This email address is already taken";
 export const FIREBASE_WEAK_PASSWORD = "Password is too weak";
 
+export const USER_SCREEN_FORGOT_PASSWORD = "Forgot password?";
+export const USER_SCREEN_GUEST_NAME = "Stranger";
+export const USER_SCREEN_LOGOUT = "Logout";
 export const LOGIN_BUTTON_TEXT = "Login";
 export const LOGIN_SUBMIT_BUTTON = "Enter";
 export const REGISTER_BUTTON_TEXT = "Register";

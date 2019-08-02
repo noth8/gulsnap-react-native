@@ -25,3 +25,8 @@ export const FIREBASE_EMAIL_NOT_FOUND = "auth/user-not-found";
 export const FIREBASE_WRONG_PASSWORD = "auth/wrong-password";
 export const FIREBASE_EMAIL_OCCUPIED = "auth/email-already-in-use";
 export const FIREBASE_WEAK_PASSWORD = "auth/weak-password";
+
+export const NAVIGATION_BACK = "Navigation/BACK";
+export const BACK_TO_TAB_AFTER_AUTH = "back_to_tab_after_auth";
+export const BACK_TO_SCREEN_AFTER_AUTH = "back_to_screen_after_auth";
+export const BACK_TO_PARENT_SCREEN = "back_to_parent_screen";
