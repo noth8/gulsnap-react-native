@@ -19,8 +19,7 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.apiUrl = "https://api.myjson.com/bins/1bjj8o";
-
+    this.apiUrl = `https://api.unsplash.com/photos/random?count=${conf.HOME_PAGE_IMAGES_AMOUNT_TO_LOAD}&client_id=${conf.UNSPLASH_API_ACCESS_KEY}`;
     const { width, height } = Dimensions.get("window");
     const devicePixelRatio = PixelRatio.get();
     this.deviceWidth = width;
