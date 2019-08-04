@@ -12,6 +12,7 @@ import { backToTabAfterAuthAction } from "../actions";
 import {
   HomeScreen,
   FullImageScreen,
+  LikesScreen,
   UserScreen,
   LoginScreen,
   RegisterScreen,
@@ -61,6 +62,22 @@ const TabNavigator = createMaterialBottomTabNavigator(
           <Icon name="home" size={20} color={tintColor} />
         )
       }
+    },
+    Likes: {
+      screen: LikesScreen,
+      navigationOptions: ({ navigation }) => ({
+        header: null,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="heart" size={20} color={tintColor} />
+        ),
+        tabBarOnPress: () => {
+          navigation.dispatch(
+            backToTabAfterAuthAction({
+              routeName: navigation.state.routeName
+            })
+          );
+        }
+      })
     },
     User: {
       screen: AuthNavigator,
