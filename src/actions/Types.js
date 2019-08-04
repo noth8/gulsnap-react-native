@@ -30,3 +30,17 @@ export const NAVIGATION_BACK = "Navigation/BACK";
 export const BACK_TO_TAB_AFTER_AUTH = "back_to_tab_after_auth";
 export const BACK_TO_SCREEN_AFTER_AUTH = "back_to_screen_after_auth";
 export const BACK_TO_PARENT_SCREEN = "back_to_parent_screen";
+
+export const LIKE_PENDING_FOR_AUTH = "like_pending_for_auth";
+
+export const LIKES_FETCH_PROCESS = "likes_fetch_process";
+export const LIKES_FETCH_SUCCESS = "likes_fetch_success";
+export const LIKES_FETCH_ERROR = "likes_fetch_error";
+
+export const LIKE_SAVE_PROCESS = "like_save_process";
+export const LIKE_SAVE_SUCCESS = "like_save_success";
+export const LIKE_SAVE_ERROR = "like_save_error";
+
+export const LIKE_REMOVE_PROCESS = "like_remove_process";
+export const LIKE_REMOVE_SUCCESS = "like_remove_success";
+export const LIKE_REMOVE_ERROR = "like_remove_error";

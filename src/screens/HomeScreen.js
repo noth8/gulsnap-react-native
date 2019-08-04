@@ -62,6 +62,7 @@ class HomeScreen extends Component {
           renderFooter={this.renderFooter}
           renderAheadOffset={this.deviceHeight * 2}
           thumbnailWidthPx={this.thumbnailWidthPx}
+          currentRoute="Home"
         />
       </View>
     );

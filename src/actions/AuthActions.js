@@ -1,5 +1,6 @@
 import firebase from "@firebase/app";
 import "@firebase/auth";
+import { likesFetchAction } from "./LikesActions";
 import * as types from "./Types";
 import * as lang from "../config/languages";
 
@@ -24,6 +25,7 @@ export const loginUserAction = ({ email, password }) => dispatch => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user => {
+      dispatch(likesFetchAction());
       dispatch({
         type: types.LOGIN_USER_SUCCESS,
         payload: user

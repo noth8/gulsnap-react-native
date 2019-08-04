@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { SafeAreaView } from "react-navigation";
 import { createImageProgress } from "react-native-image-progress";
 import { replaceUrlParam } from "../utils";
+import LikeButton from "../components/LikeButton";
 import { Spinner } from "../components/common";
 import * as conf from "../config/app";
 
@@ -55,7 +56,12 @@ FullImageScreen.navigationOptions = () => ({
     marginLeft: 0,
     color: "white",
     fontSize: 18
-  }
+  },
+  headerRight: (
+    <View>
+      <LikeButton />
+    </View>
+  )
 });
 
 const styles = StyleSheet.create({

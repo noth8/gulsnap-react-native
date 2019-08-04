@@ -5,7 +5,11 @@ import { NavigationActions } from "react-navigation";
 import { RecyclerListView } from "recyclerlistview";
 import Thumbnail from "./Thumbnail";
 import { Spinner } from "./common";
-import { setSelectedImageAction } from "../actions";
+import {
+  setSelectedImageAction,
+  backToScreenAfterAuthAction,
+  backToParentScreenAction
+} from "../actions";
 import * as lang from "../config/languages";
 
 const List = ({
@@ -19,7 +23,10 @@ const List = ({
   loading,
   error,
   setSelectedImage,
-  fullSizeImageScreen
+  fullSizeImageScreen,
+  backToScreenAfterAuth,
+  backToParentScreen,
+  currentRoute
 }) => {
   const { errorViewStyle, errorTextStyle } = styles;
 
@@ -29,6 +36,8 @@ const List = ({
       onPress={() => {
         setSelectedImage(data.urls.regular);
         fullSizeImageScreen({ routeName: "FullImage" });
+        backToScreenAfterAuth({ routeName: "FullImage" });
+        backToParentScreen({ routeName: currentRoute });
       }}
     >
       <View style={{ flex: 1 }}>
@@ -87,7 +96,10 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => ({
   setSelectedImage: url => dispatch(setSelectedImageAction(url)),
   fullSizeImageScreen: routeName =>
-    dispatch(NavigationActions.navigate(routeName))
+    dispatch(NavigationActions.navigate(routeName)),
+  backToScreenAfterAuth: routeName =>
+    dispatch(backToScreenAfterAuthAction(routeName)),
+  backToParentScreen: routeName => dispatch(backToParentScreenAction(routeName))
 });
 
 export default connect(
